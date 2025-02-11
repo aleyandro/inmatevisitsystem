@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inmate Visit Disclaimer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar-custom {
+            background-color: #d4edda;
+        }
+        .footer-custom {
+            background-color: #d4edda;
+        }
+        .container-custom {
+            max-width: 700px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-yes {
+            background-color: #27ae60;
+            color: white;
+        }
+        .btn-yes:hover {
+            background-color: #1f8c4d;
+        }
+        .btn-no {
+            background-color: #c0392b;
+            color: white;
+        }
+        .btn-no:hover {
+            background-color: #992d22;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="/images/logo.jpg" alt="Logo" height="40" class="me-2">
+                <span>Inmate Visit Booking System</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container container-custom">
+            <h1 class="text-center mb-4">Inmate Visit Booking System Disclaimer</h1>
+            <p>Before you can continue to book a visit to see your loved ones, please adhere to the following guidelines:</p>
+            <ol>
+                <li><strong>Valid ID or Passport</strong></li>
+                <li><strong>Birth Certificates for Children Under 12</strong></li>
+                <li><strong>Personal items limited to a small handbag or wallet</strong></li>
+            </ol>
+            <p class="text-danger mt-4">
+                <strong>Note:</strong> Any prohibited items will not be allowed inside. Please dress in an appropriate manner (e.g., Smart Casual). Failure to comply with the guidelines may result in denied entry.
+            </p>
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <button class="btn btn-yes px-4" onclick="window.location.href='book'">Yes, I Agree</button>
+                <button class="btn btn-no px-4" onclick="window.location.href='/'">No, I Do Not Agree</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-custom text-center py-3 mt-auto">
+        &copy; 2024 Inmate Visit Booking System. All Rights Reserved.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

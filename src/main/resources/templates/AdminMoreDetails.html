@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .navbar {
+            background-color: #0e2433;
+        }
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .admin-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 30px auto;
+        }
+        h1 {
+            color: #0e2433;
+        }
+        .action-buttons button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="/images/logo.jpg" alt="Logo">
+                <span>Admin Dashboard</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="btn btn-danger" href="/" aria-label="Logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="container text-center my-4">
+        <h1>Booking Details</h1>
+    </div>
+
+    <!-- Booking Details Container -->
+    <div class="container admin-container">
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>Visitor Identity Number:</th>
+                    <td th:text="${booking.identityNumber}"></td>
+                </tr>
+                <tr>
+                    <th>Correctional Centre To Visit:</th>
+                    <td th:text="${booking.centre}"></td>
+                </tr>
+                <tr>
+                    <th>Email Address:</th>
+                    <td th:text="${booking.visitorEmail}"></td>
+                </tr>
+                <tr>
+                    <th>Phone Number:</th>
+                    <td th:text="${booking.visitorPhone}"></td>
+                </tr>
+                <tr>
+                    <th>Inmate's Name:</th>
+                    <td th:text="${booking.inmateName}"></td>
+                </tr>
+                <tr>
+                    <th>Inmate's Registration Number:</th>
+                    <td th:text="${booking.inmateRegistration}"></td>
+                </tr>
+                <tr>
+                    <th>Preferred Date of Visit:</th>
+                    <td th:text="${booking.visitDate}"></td>
+                </tr>
+                <tr>
+                    <th>Preferred Time of Visit:</th>
+                    <td th:text="${booking.visitTime}"></td>
+                </tr>
+                <tr>
+                    <th>Details of Visitors (Max 2 including self):</th>
+                    <td th:text="${booking.message}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Action Buttons -->
+        <div class="row g-3">
+            <div class="col-md-6">
+                <form action="/booking/approveBooking" method="post">
+                    <input type="hidden" name="bookingId" th:value="${booking.id}">
+                    <button class="btn btn-success w-100" type="submit">Approve</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form action="/booking/rejectBooking" method="post">
+                    <input type="hidden" name="bookingId" th:value="${booking.id}">
+                    <button class="btn btn-danger w-100" type="submit">Reject</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inmate Booking Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styling for Navbar and Footer */
+        .navbar-custom {
+            background-color: #d4edda; /* Light green background */
+        }
+
+        .footer-custom {
+            background-color: #d4edda; /* Light green background */
+            color: #333; /* Text color */
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .container-custom {
+            max-width: 700px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #28a745; /* Green background for button */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="/images/logo.jpg" alt="Logo" height="40" class="me-2">
+                <span>Inmate Visit Booking System</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" th:href="@{/}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Booking Form -->
+    <div class="container container-custom">
+        <h2 class="text-center mb-4">Inmate Visit Booking Form </h2>
+        
+        <!-- Error Message -->
+        <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+        
+        <form th:action="@{/book}" th:object="${bookingDto}" method="post">
+            <!-- Input Fields -->
+            <div class="form-group">
+                <label for="visitorNamesurname">Full Name & Surname:</label>
+                <input type="text" id="visitorNamesurname" th:field="*{visitorNamesurname}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="identityNumber">Identity Number:</label>
+                <input type="text" id="identityNumber" th:field="*{identityNumber}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="addressInfull">Address In Full:</label>
+                <input type="text" id="addressInfull" th:field="*{addressInfull}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="relationship">Relationship:</label>
+                <select id="relationship" th:field="*{relationship}" class="form-control" required>
+                    <option value="" disabled selected>Select your relationship</option>
+                    <option value="parents">Parents</option>
+                    <option value="siblings">Siblings</option>
+                    <option value="friend">Friend</option>
+                    <option value="spouse">Spouse</option>
+                    <option value="legal_representatives">Legal Representatives</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="centre">Correctional Centre To Visit:</label>
+                <select id="centre" th:field="*{centre}" class="form-control" required>
+                    <option value="" disabled selected>Select Centre</option>
+                    <option value="Kgosi_Mampuru_II">Kgosi Mampuru II</option>
+                    <option value="Baviaanspoort">Baviaanspoort</option>
+                    <option value="Qalakabusha">Qalakabusha</option>
+                    <option value="Empangeni_Meduim_A">Empangeni Medium A</option>
+                    <option value="Westville">Westville</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="visitorEmail">Email Address:</label>
+                <input type="email" id="visitorEmail" th:field="*{visitorEmail}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="visitorPhone">Phone Number:</label>
+                <input type="tel" id="visitorPhone" th:field="*{visitorPhone}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="inmateName">Inmate's Name:</label>
+                <input type="text" id="inmateName" th:field="*{inmateName}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="inmateRegistration">Inmate's Registration Number:</label>
+                <input type="text" id="inmateRegistration" th:field="*{inmateRegistration}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="visitDate">Preferred Date of Visit:</label>
+                <input type="date" id="visitDate" th:field="*{visitDate}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="visitTime">Preferred Time of Visit:</label>
+                <select id="visitTime" th:field="*{visitTime}" class="form-control" required>
+                    <option value="" disabled selected>Select a time slot</option>
+                    <option value="09:00">09:00 AM - 10:00 AM</option>
+                    <option value="10:00">10:00 AM - 11:00 AM</option>
+                    <option value="11:00">11:00 AM - 12:00 PM</option>
+                    <option value="12:00">12:00 PM - 01:00 PM</option>
+                    <option value="01:00">01:00 PM - 02:00 PM</option>
+                    <option value="02:00">02:00 PM - 03:00 PM</option>
+                    <option value="03:00">03:00 PM - 04:00 PM</option>
+                    <option value="04:00">04:00 PM - 05:00 PM</option>
+                </select>
+            </div>
+            
+            <!-- Additional Details Table -->
+			<div class="form-group">
+			    <label for="message">Details of Accompanying Persons (Max 2):</label>
+			    
+			    <!-- Hidden field to bind to the message property -->
+			    <input type="hidden" th:field="*{message}" id="message" />
+
+			    <div class="table-responsive">
+			        <table class="table table-bordered">
+			            <thead>
+			                <tr>
+			                    <th>Name</th>
+			                    <th>Surname</th>
+			                    <th>ID</th>
+			                    <th>Address</th>
+			                    <th>Phone</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                <tr>
+			                    <td><input type="text" class="form-control" placeholder="Name" id="name1"></td>
+			                    <td><input type="text" class="form-control" placeholder="Surname" id="surname1"></td>
+			                    <td><input type="text" class="form-control" placeholder="ID" id="id1"></td>
+			                    <td><input type="text" class="form-control" placeholder="Address" id="address1"></td>
+			                    <td><input type="text" class="form-control" placeholder="Phone" id="phone1"></td>
+			                </tr>
+			                <tr>
+			                    <td><input type="text" class="form-control" placeholder="Name" id="name2"></td>
+			                    <td><input type="text" class="form-control" placeholder="Surname" id="surname2"></td>
+			                    <td><input type="text" class="form-control" placeholder="ID" id="id2"></td>
+			                    <td><input type="text" class="form-control" placeholder="Address" id="address2"></td>
+			                    <td><input type="text" class="form-control" placeholder="Phone" id="phone2"></td>
+			                </tr>
+			            </tbody>
+			        </table>
+			    </div>
+			</div>
+
+			<script>
+			    // JavaScript to combine table data into the message field
+			    document.querySelectorAll('input').forEach(input => {
+			        input.addEventListener('input', () => {
+			            const messageField = document.getElementById('message');
+			            const details = [];
+
+			            // Collect data from each row
+			            for (let i = 1; i <= 2; i++) {
+			                const name = document.getElementById(`name${i}`).value;
+			                const surname = document.getElementById(`surname${i}`).value;
+			                const id = document.getElementById(`id${i}`).value;
+			                const address = document.getElementById(`address${i}`).value;
+			                const phone = document.getElementById(`phone${i}`).value;
+
+			                if (name || surname || id || address || phone) {
+			                    details.push(
+			                        `Name: ${name}, Surname: ${surname}, ID: ${id}, Address: ${address}, Phone: ${phone}`
+			                    );
+			                }
+			            }
+
+			            // Join details into a single message
+			            messageField.value = details.join('; ');
+			        });
+			    });
+			</script>
+
+			
+			<!-- Hidden input to store the message field -->
+			   
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Submit Booking</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-custom">
+        <p>&copy; 2024 Inmate Visit Booking System. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

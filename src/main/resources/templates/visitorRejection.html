@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Rejection Reason</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #45b6fe;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo-container img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 5px 10px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #0e2433;
+            border-radius: 5px;
+        }
+
+        /* Main Content Styling */
+        .container {
+            background-color: #ffffff;
+            padding: 50px 30px;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .container h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .container textarea {
+            width: 100%;
+            height: 100px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            resize: none;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .submit-btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #45b6fe;
+            color: #ffffff;
+            margin-top: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .navbar ul {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="/images/logo.jpg" alt="Logo">
+            <div class="logo">Inmate Visit Booking System</div>
+        </div>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="/" aria-label="Logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="container" id="booking-rejection">
+            <h1>Please provide reasons for rejecting the booking</h1>
+            <textarea placeholder="Enter rejection reason here..."></textarea>
+            <button class="submit-btn" onclick="submitResponse()">Submit</button>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; 2024 Inmate Visit Booking System. All Rights Reserved.
+    </footer>
+
+    <script>
+        function submitResponse() {
+            alert("Response has been sent to visitor regarding the rejection of the booking.");
+        }
+    </script>
+</body>
+</html>

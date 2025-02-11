@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #f4f4f9;
+        }
+        .navbar {
+            background-color: #0e2433;
+        }
+        .navbar-brand img {
+            max-height: 50px;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f1f9ff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="/images/logo.jpg" alt="Logo">
+				<span>Admin Dashboard</span>
+            </a>
+            <div>
+                <a href="/AdminFrontpage" class="btn btn-primary me-2">Dashboard</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center text-primary mb-4">Admin Dashboard For Visitor Bookings</h1>
+
+        <!-- Booking Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <caption>Visitor Bookings Overview</caption>
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Booking ID</th>
+                        <th scope="col">Visitor Name</th>
+                        <th scope="col">Visit Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through bookings and create a View/Edit link for each one -->
+                    <tr th:each="booking : ${bookings}">
+                        <td th:text="${booking.id}"></td>
+                        <td th:text="${booking.visitorNamesurname}"></td>
+                        <td th:text="${booking.visitDate}"></td>
+                        <td>
+                            <a th:href="@{/admin/booking/{id}(id=${booking.id})}" class="btn btn-info btn-sm">Click for More Details</a>
+							<form th:action="@{/approve-booking/{id}(id=${booking.id})}" method="post" style="display:inline;">
+							            <button type="submit" class="btn btn-success btn-sm">Approve</button>
+							        </form>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(bookings)}">
+                        <td colspan="4" class="text-center">No bookings available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
