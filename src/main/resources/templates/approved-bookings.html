@@ -7,74 +7,26 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f4f4f9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-        }
-        .navbar {
-            background-color: #0e2433;
-        }
-        .navbar-brand img {
-            max-height: 50px;
-        }
-        .navbar-nav .nav-item .btn {
-            border-radius: 25px;
-            padding: 8px 20px;
-            font-size: 1rem;
-        }
-        .navbar-nav .nav-item .btn:hover {
-            background-color: #28a745;
-        }
-        .table-hover tbody tr:hover {
-            background-color: #f1f9ff;
-        }
-        .table th, .table td {
-            padding: 15px;
-            text-align: center;
-        }
-        .table thead {
-            background-color: #343a40;
-            color: #ffffff;
-        }
-        .print-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .back-btn, .logout-btn {
-            background-color: #ff6666;
-            color: white;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 25px;
-            transition: background-color 0.3s ease;
-            text-decoration: none;
-        }
-        .back-btn:hover, .logout-btn:hover {
-            background-color: #ff4d4d;
-        }
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: #32CD32;
-        }
-        .btn-success {
-            border-radius: 25px;
-            padding: 10px 30px;
-        }
-        .btn-success:hover {
-            background-color: #28a745;
-        }
-        .table-responsive {
-            margin-top: 30px;
-        }
+        body { background-color: #f4f4f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; }
+        .navbar { background-color: #0e2433; }
+        .navbar-brand img { max-height: 50px; }
+        .navbar-nav .nav-item .btn { border-radius: 25px; padding: 8px 20px; font-size: 1rem; }
+        .navbar-nav .nav-item .btn:hover { background-color: #28a745; }
+        .table-hover tbody tr:hover { background-color: #f1f9ff; }
+        .table th, .table td { padding: 15px; text-align: center; }
+        .table thead { background-color: #343a40; color: #ffffff; }
+        .print-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .back-btn, .logout-btn { background-color: #ff6666; color: white; padding: 10px 20px; font-size: 1rem; border-radius: 25px; transition: background-color 0.3s ease; text-decoration: none; }
+        .back-btn:hover, .logout-btn:hover { background-color: #ff4d4d; }
+        h1 { font-size: 2.2rem; font-weight: 600; color: #32CD32; }
+        .btn-success { border-radius: 25px; padding: 10px 30px; }
+        .btn-success:hover { background-color: #28a745; }
+        .table-responsive { margin-top: 30px; }
+        #searchInput { width: 300px; margin-bottom: 15px; border-radius: 20px; padding: 8px; border: 1px solid #ccc; }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="#">
@@ -83,7 +35,7 @@
             </a>
             <div class="ms-auto">
                 <a href="/admins" class="back-btn">Back to Pending</a>
-                <a href="/logout" class="logout-btn ms-2">Logout</a> <!-- Added Logout Button -->
+                <a href="/logout" class="logout-btn ms-2">Logout</a>
             </div>
         </div>
     </nav>
@@ -94,14 +46,17 @@
             <button onclick="printTable()" class="btn btn-success">🖨️ Print Approved Bookings</button>
         </div>
 
-        <!-- Booking Table -->
+        <!-- Search Filter -->
+        <input type="text" id="searchInput" class="form-control" placeholder="Search by Visitor ID Number..." onkeyup="filterTable()">
+
         <div class="table-responsive" id="printSection">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover" id="bookingTable">
                 <caption>List of Approved Visitor Bookings</caption>
                 <thead>
                     <tr>
                         <th scope="col">Booking ID</th>
                         <th scope="col">Visitor Name</th>
+                        <th scope="col">Visitor Identity Number</th>
                         <th scope="col">Inmate's Name</th>
                         <th scope="col">Inmate's Registration Number</th>
                         <th scope="col">Visit Date</th>
@@ -111,23 +66,35 @@
                     <tr th:each="booking : ${bookings}">
                         <td th:text="${booking.id}"></td>
                         <td th:text="${booking.visitorNamesurname}"></td>
+                        <td th:text="${booking.identityNumber}" class="identity-number"></td>
                         <td th:text="${booking.inmateName}"></td>
                         <td th:text="${booking.inmateRegistration}"></td>
                         <td th:text="${booking.visitDate}"></td>
                     </tr>
                     <tr th:if="${#lists.isEmpty(bookings)}">
-                        <td colspan="5" class="text-center">No approved bookings available</td>
+                        <td colspan="6" class="text-center">No approved bookings available</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Print Function -->
     <script>
+        function filterTable() {
+            let input = document.getElementById("searchInput");
+            let filter = input.value.toUpperCase();
+            let table = document.getElementById("bookingTable");
+            let tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                let td = tr[i].getElementsByClassName("identity-number")[0];
+                if (td) {
+                    let txtValue = td.textContent || td.innerText;
+                    tr[i].style.display = txtValue.toUpperCase().includes(filter) ? "" : "none";
+                }
+            }
+        }
+
         function printTable() {
             let printContent = document.getElementById("printSection").innerHTML;
             let originalContent = document.body.innerHTML;
@@ -135,9 +102,10 @@
             document.body.innerHTML = printContent;
             window.print();
             document.body.innerHTML = originalContent;
-            window.location.reload(); // Reload to restore buttons and navbar
+            window.location.reload();
         }
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
