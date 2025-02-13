@@ -9,8 +9,10 @@
     <!-- Custom Styles -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
         }
         .navbar {
             background-color: #0e2433;
@@ -19,21 +21,50 @@
             height: 40px;
             margin-right: 10px;
         }
+        .navbar-nav .nav-item .btn {
+            border-radius: 20px;
+        }
         .admin-section {
             background-color: #ffffff;
-            padding: 50px 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
             text-align: center;
-            margin: 30px auto;
-            max-width: 600px;
+            margin: 50px auto;
+            max-width: 700px;
+            transition: all 0.3s ease;
+        }
+        .admin-section:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
         .admin-section h2 {
             color: #0e2433;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .admin-section p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .admin-section .btn {
+            background-color: #32CD32;
+            color: white;
+            font-size: 1.1rem;
+            padding: 12px 30px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+        .admin-section .btn:hover {
+            background-color: #28a745;
         }
         .footer {
             background-color: #0e2433;
             color: #ffffff;
+            font-size: 0.9rem;
+        }
+        .footer p {
+            margin: 0;
         }
     </style>
 </head>
@@ -62,15 +93,14 @@
     <main class="container">
         <div class="admin-section">
             <h2>Welcome, [[${user.getFullname}]]</h2>
-            <h2>Admin Dashboard</h2>
-            <p class="mb-4">Admins can manage booking requests, view schedules, and handle visitor management. Click the button below to access the visitor bookings.</p>
-            <a href="admins" class="btn btn-primary btn-lg">Go to Bookings</a>
+            <p>Admins can manage booking requests, view schedules, and handle visitor management. Click the button below to access the visitor bookings.</p>
+            <a href="admins" class="btn btn-success btn-lg">Go to Bookings</a>
         </div>
     </main>
 
     <!-- Footer -->
     <footer class="footer text-center py-3">
-        &copy; 2024 Inmate Visit Booking System. All Rights Reserved.
+        <p>&copy; 2024 Inmate Visit Booking System. All Rights Reserved.</p>
     </footer>
 
     <!-- Bootstrap Bundle with Popper -->
