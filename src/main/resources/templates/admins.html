@@ -31,14 +31,14 @@
 				<span>Admin Dashboard</span>
             </a>
             <div>
-                <a href="/AdminFrontpage" class="btn btn-primary me-2">Dashboard</a>
+                <a href="/approved-bookings" class="btn btn-primary me-2">Approved Bookings</a>
                 <a href="/logout" class="btn btn-danger">Logout</a>
             </div>
         </div>
     </nav>
 
     <div class="container mt-5">
-        <h1 class="text-center text-primary mb-4">Admin Dashboard For Visitor Bookings</h1>
+        <h1 class="text-center text-primary mb-4"> Bookings Pending Approval/Rejection</h1>
 
         <!-- Booking Table -->
         <div class="table-responsive">
@@ -47,6 +47,7 @@
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">Booking ID</th>
+						<th scope="col">Visitor Identity Number</th>
                         <th scope="col">Visitor Name</th>
                         <th scope="col">Visit Date</th>
                         <th scope="col">Action</th>
@@ -54,14 +55,16 @@
                 </thead>
                 <tbody>
                     <!-- Loop through bookings and create a View/Edit link for each one -->
-                    <tr th:each="booking : ${bookings}">
+					<tr th:each="booking : ${bookings}">
+
                         <td th:text="${booking.id}"></td>
+						<td th:text="${booking.identityNumber}"></td>
                         <td th:text="${booking.visitorNamesurname}"></td>
                         <td th:text="${booking.visitDate}"></td>
                         <td>
                             <a th:href="@{/admin/booking/{id}(id=${booking.id})}" class="btn btn-info btn-sm">Click for More Details</a>
 							<form th:action="@{/approve-booking/{id}(id=${booking.id})}" method="post" style="display:inline;">
-							            <button type="submit" class="btn btn-success btn-sm">Approve</button>
+							            
 							        </form>
                         </td>
                     </tr>

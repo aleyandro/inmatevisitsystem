@@ -27,8 +27,10 @@ public class Booking {
 	    private LocalTime visitTime;
 	    private String message;
 	    
+	
+	    
 	    @Enumerated(EnumType.STRING)
-	    private BookingStatus status; // Add this line
+	   private BookingStatus status; // Add this line
 	    
 		
 
@@ -58,9 +60,9 @@ public class Booking {
 		   return status;
 		}
 		
-		public void setStatus(BookingStatus status) {
-	        this.status = status;
-	    }
+		public void setStatus(BookingStatus approved) {
+			this.status = approved;
+		}
 		
 	    // Getters and Setters
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import admin_user.model.Booking;
+import admin_user.model.BookingStatus;
 import admin_user.service.BookingService;
 
 @Controller
@@ -20,7 +21,7 @@ public class AdminController {
 
 	    @GetMapping("/admins")
 	    public String showAdminPage(Model model) {
-	        List<Booking> bookings = bookingService.getAllBookings();
+	        List<Booking> bookings = bookingService.getBookingsByStatus(BookingStatus.NEW);
 	        model.addAttribute("bookings", bookings);
 	        return "admins"; // Renders admins.html
 	    }
@@ -29,7 +30,8 @@ public class AdminController {
 	        bookingService.approveBooking(id);
 	        return "redirect:/admins"; // Redirect back to admin page
 	    }
-
+	    
+	  
 	    
 	   
 

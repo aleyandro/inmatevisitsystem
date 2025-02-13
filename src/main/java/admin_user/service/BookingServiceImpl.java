@@ -64,7 +64,7 @@ public class BookingServiceImpl implements BookingService {
     
     @Override
     public List<Booking> getPendingBookings() {
-        return bookingRepository.findByStatus(BookingStatus.NEW);
+        return bookingRepository.findByStatus(BookingStatus.PENDING);
     }
 
     @Override
