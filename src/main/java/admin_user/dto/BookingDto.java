@@ -19,11 +19,12 @@ public class BookingDto {
     private LocalDate visitDate;
     private LocalTime visitTime;
     private String message;
+    private String inmateUnitNumber;
     
     
 	public BookingDto(String visitorNamesurname, String identityNumber, String addressInfull, String relationship,
 			String centre, String visitorEmail, String visitorPhone, String inmateName, String inmateRegistration,
-			LocalDate visitDate, LocalTime visitTime, String message) {
+			LocalDate visitDate, LocalTime visitTime, String message, String inmateUnitNumber ) {
 		super();
 		this.visitorNamesurname = visitorNamesurname;
 		this.identityNumber = identityNumber;
@@ -37,10 +38,27 @@ public class BookingDto {
 		this.visitDate = visitDate;
 		this.visitTime = visitTime;
 		this.message = message;
+		this.inmateUnitNumber = inmateUnitNumber;
 	}
 
 
 	
+
+
+	public String getInmateUnitNumber() {
+		return inmateUnitNumber;
+	}
+
+
+
+
+
+	public void setInmateUnitNumber(String inmateUnitNumber) {
+		this.inmateUnitNumber = inmateUnitNumber;
+	}
+
+
+
 
 
 	public String getVisitorNamesurname() {

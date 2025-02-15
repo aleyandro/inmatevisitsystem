@@ -23,6 +23,7 @@ public class Booking {
 	    private String visitorPhone;
 	    private String inmateName;
 	    private String inmateRegistration;
+	    private String inmateUnitNumber;
 	    private LocalDate visitDate;
 	    private LocalTime visitTime;
 	    private String message;
@@ -36,7 +37,7 @@ public class Booking {
 
 		public Booking(String visitorNamesurname, String identityNumber, String addressInfull, String relationship,
 				String centre, String visitorEmail, String visitorPhone, String inmateName, String inmateRegistration,
-				LocalDate visitDate, LocalTime visitTime, String message) {
+				LocalDate visitDate, LocalTime visitTime, String message, String inmateUnitNumber) {
 			super();
 			this.visitorNamesurname = visitorNamesurname;
 			this.identityNumber = identityNumber;
@@ -50,6 +51,7 @@ public class Booking {
 			this.visitDate = visitDate;
 			this.visitTime = visitTime;
 			this.message = message;
+			this.inmateUnitNumber= inmateUnitNumber;
 		}
 		
 		public Booking() {
@@ -168,6 +170,13 @@ public class Booking {
 
 		public void setMessage(String message) {
 			this.message = message;
+		}
+		 public String getInmateUnitNumer() {
+				return inmateUnitNumber;
+		}
+
+		public void setInmateUnitNumer(String inmateUnitNumer) {
+				this.inmateUnitNumber = inmateUnitNumer;
 		}
 		
 		
