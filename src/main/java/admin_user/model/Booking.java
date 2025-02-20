@@ -171,13 +171,14 @@ public class Booking {
 		public void setMessage(String message) {
 			this.message = message;
 		}
-		 public String getInmateUnitNumer() {
+		 public String getInmateUnitNumber() {
 				return inmateUnitNumber;
 		}
 
-		public void setInmateUnitNumer(String inmateUnitNumer) {
-				this.inmateUnitNumber = inmateUnitNumer;
-		}
+		 public void setInmateUnitNumber(String inmateUnitNumber) {
+			    this.inmateUnitNumber = inmateUnitNumber;
+			}
+
 		
 		
 	    

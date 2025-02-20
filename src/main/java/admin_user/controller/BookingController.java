@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import admin_user.dto.BookingDto;
 import admin_user.dto.UserDto;
+import admin_user.model.Booking;
+import admin_user.model.BookingStatus;
 import admin_user.service.BookingService;
 
 @Controller
@@ -36,5 +38,21 @@ public class BookingController {
 	        bookingService.rejectBooking(bookingId);
 	        return "redirect:/admins"; // Redirect back to the admin dashboard
 	    }
+	    
+	 // New method to update the Inmate's Unit Number
+	    @PostMapping("/updateUnitNumber")
+	    public String updateUnitNumber(@RequestParam("bookingId") Long bookingId, 
+	                                   @RequestParam("unitNumber") String unitNumber) {
+	        Booking booking = bookingService.findBookingById(bookingId);
+	        if (booking != null) {
+	            booking.setInmateUnitNumber(unitNumber);
+	            // Ensure this matches the entity field name
+	            booking.setStatus(BookingStatus.APPROVED);
+	            bookingService.saveBooking(booking); // Save the updated booking (using the method that accepts a Booking object)
+	        }
+	        return "redirect:/admins"; // Redirect to the admin dashboard after update
+	    }
+
+
 
 }

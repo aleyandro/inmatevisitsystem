@@ -88,12 +88,7 @@
                     <th>Inmate's Registration Number:</th>
                     <td th:text="${booking.inmateRegistration}"></td>
                 </tr>
-				<tr>
-				          <th>Inmate's Unit Number:</th>
-						  <td>
-						          <input type="text" name="unitNumber" class="form-control" placeholder="Enter Unit Number">
-						      </td>
-				         </tr>
+               
                 <tr>
                     <th>Preferred Date of Visit:</th>
                     <td th:text="${booking.visitDate}"></td>
@@ -106,6 +101,19 @@
                     <th>Details of Visitors (Max 2 including self):</th>
                     <td th:text="${booking.message}"></td>
                 </tr>
+				<tr>
+								<td>
+									<form th:action="@{/booking/updateUnitNumber}" method="post" id="unitForm">
+									    <input type="hidden" name="bookingId" th:value="${booking.id}" />
+									    <div class="form-group">
+									        <label for="unitNumber">Inmate's Unit Number</label>
+									        <input type="text" id="unitNumber" name="unitNumber" class="form-control" 
+									               th:value="${booking.inmateUnitNumber}" required 
+									               oninput="autoSubmit()">
+									    </div>
+									</form>
+								   </td>
+				               </tr>
             </tbody>
         </table>
 
@@ -114,12 +122,14 @@
             <div class="col-md-6">
                 <form action="/booking/approveBooking" method="post">
                     <input type="hidden" name="bookingId" th:value="${booking.id}">
+                    <input type="hidden" name="inmateUnitNumber" class="unit-number-field">
                     <button class="btn btn-success w-100" type="submit">Approve</button>
                 </form>
             </div>
             <div class="col-md-6">
                 <form action="/booking/rejectBooking" method="post">
                     <input type="hidden" name="bookingId" th:value="${booking.id}">
+                    <input type="hidden" name="inmateUnitNumber" class="unit-number-field">
                     <button class="btn btn-danger w-100" type="submit">Reject</button>
                 </form>
             </div>
@@ -128,5 +138,14 @@
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Ensure the Unit Number field is sent with the form
+		function autoSubmit() {
+		    clearTimeout(window.submitTimeout);
+		    window.submitTimeout = setTimeout(() => {
+		        document.getElementById('unitForm').submit();
+		    }, 1000); // Waits 1second before submitting
+		}
+    </script>
 </body>
 </html>

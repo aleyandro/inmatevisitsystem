@@ -54,21 +54,23 @@
                 <caption>List of Approved Visitor Bookings</caption>
                 <thead>
                     <tr>
-                        <th scope="col">Booking ID</th>
+                        
                         <th scope="col">Visitor Name</th>
                         <th scope="col">Visitor Identity Number</th>
                         <th scope="col">Inmate's Name</th>
                         <th scope="col">Inmate's Registration Number</th>
+						<th scope="col">Inmate's Unit Number</th>
                         <th scope="col">Visit Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="booking : ${bookings}">
-                        <td th:text="${booking.id}"></td>
+                        
                         <td th:text="${booking.visitorNamesurname}"></td>
                         <td th:text="${booking.identityNumber}" class="identity-number"></td>
                         <td th:text="${booking.inmateName}"></td>
                         <td th:text="${booking.inmateRegistration}"></td>
+						<td th:text="${booking.inmateUnitNumber}"></td>
                         <td th:text="${booking.visitDate}"></td>
                     </tr>
                     <tr th:if="${#lists.isEmpty(bookings)}">

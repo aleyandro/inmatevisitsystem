@@ -8,6 +8,7 @@ import admin_user.dto.BookingDto;
 import admin_user.model.Booking;
 import admin_user.model.BookingStatus;
 import admin_user.repository.BookingRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -41,6 +42,7 @@ public class BookingServiceImpl implements BookingService {
         book.setVisitTime(visitTime);
         book.setMessage(bookingDto.getMessage());
         book.setStatus(BookingStatus.NEW); // Corrected
+        book.setInmateUnitNumber(bookingDto.getInmateUnitNumber());  // ADD THIS LINE
 
         bookingRepository.save(book);
 
@@ -122,4 +124,10 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> getBookingsByStatus(BookingStatus status) {
         return bookingRepository.findByStatus(status);
     }
+
+	@Override
+	public void saveBooking(Booking booking) {
+		bookingRepository.save(booking);
+		
+	}
 }

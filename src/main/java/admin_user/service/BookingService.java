@@ -17,5 +17,7 @@ public interface BookingService {
     //boolean isTimeSlotAvailable(String visitTime);
 	List<Booking> getPendingBookings();
 	List<Booking> getApprovedBookings();
+	void saveBooking(Booking booking); 
+
 
 }
